@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: flask-couchdb-app
-  REGISTRY: ghcr.io/${{ github.repository }}
+  REGISTRY: ghcr.io//internshippoc/scanbypasspoc/
 
 jobs:
   build-and-push:
