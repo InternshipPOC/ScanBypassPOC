@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: flask-couchdb-app
-  REGISTRY: ghcr.io/internshippoc/scanbypasspoc/
+  REGISTRY: ghcr.io/internshippoc/scanbypasspoc
 
 jobs:
   build-and-push:
@@ -31,7 +31,8 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./Front-end
+        file: ./Front-end/Dockerfile
         push: true
         tags: ghcr.io/internshippoc/scanbypasspoc/front:latest
 
@@ -39,4 +40,3 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: ghcr.io/internshippoc/scanbypasspoc/front:latest
-
