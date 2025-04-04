@@ -6,9 +6,10 @@ import os
 app = Flask(__name__)
 
 # CouchDB config
-COUCHDB_USER = 'admin'
-COUCHDB_PASS = 'admin'
-COUCHDB_HOST = 'localhost'
+COUCHDB_USER = os.environ.get('COUCHDB_USER')
+COUCHDB_PASS = os.environ.get('COUCHDB_PASS')
+
+COUCHDB_HOST = 'couchdb'
 COUCHDB_PORT = '5984'
 
 COUCHDB_BASE = f"http://{COUCHDB_HOST}:{COUCHDB_PORT}"
@@ -94,4 +95,4 @@ def logout():
     return resp
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
