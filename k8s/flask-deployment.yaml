@@ -38,9 +38,10 @@ metadata:
   name: flask-service
   namespace: scanbypass
 spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-    targetPort: 5000
+  type: NodePort
   selector:
     app: flask
+  ports:
+    - port: 80             
+      targetPort: 5000      
+      nodePort: 30894      
