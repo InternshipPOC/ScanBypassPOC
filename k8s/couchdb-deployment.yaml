@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: couchdb
-        image: ghcr.io/internshippoc/my-couchdb:latest
+        image: ghcr.io/internshippoc/my-couchdb:3
         ports:
         - containerPort: 5984
         env:
