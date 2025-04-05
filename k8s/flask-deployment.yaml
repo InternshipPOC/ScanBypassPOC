@@ -29,6 +29,8 @@ spec:
             secretKeyRef:
               name: couchdb-secret
               key: COUCHDB_PASSWORD
+      imagePullSecrets:
+      - name: ghcr-secret
 ---
 apiVersion: v1
 kind: Service
