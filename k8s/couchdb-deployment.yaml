@@ -47,26 +47,3 @@ spec:
     targetPort: 5984
   selector:
     app: couchdb
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: couchdb-init
-spec:
-  template:
-    spec:
-      restartPolicy: OnFailure
-      containers:
-      - name: init-couchdb
-        image: curlimages/curl:latest
-        command: ["/bin/sh", "-c"]
-        args:
-        - |
-          until curl -s http://adm:pass@127.0.0.1:5984/_up; do
-            echo "Waiting for CouchDB..."
-            sleep 2
-          done
-
-          curl -X PUT http://adm:pass@127.0.0.1:5984/_users
-          curl -X PUT http://adm:pass@127.0.0.1:5984/_replicator
-          curl -X PUT http://adm:pass@127.0.0.1:5984/_global_changes

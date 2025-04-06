@@ -12,6 +12,14 @@ spec:
       labels:
         app: flask
     spec:
+      dnsPolicy: ClusterFirst
+      dnsConfig:
+        nameservers:
+          - 10.32.0.94  # Replace with your cluster DNS IP if different
+        searches:
+          - default.svc.cluster.local
+          - svc.cluster.local
+          - cluster.local
       containers:
       - name: flask
         image: ghcr.io/internshippoc/scanbypasspoc/front:latest
