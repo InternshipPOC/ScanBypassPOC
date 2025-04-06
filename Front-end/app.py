@@ -35,7 +35,7 @@ def login():
         session_info = requests.get(COUCHDB_SESSION, cookies={'AuthSession': cookie}).json()
         roles = session_info.get('userCtx', {}).get('roles', [])
 
-        resp = make_response(redirect('/admin' if 'admin' in roles else '/user'))
+        resp = make_response(redirect('/admin' if 'admin' in roles or '_admin' in roles else '/user'))
         resp.set_cookie('AuthSession', cookie, httponly=True, samesite='Lax')
         return resp
 
@@ -84,7 +84,7 @@ def admin_dashboard():
     auth = request.cookies.get('AuthSession')
     r = requests.get(COUCHDB_SESSION, cookies={'AuthSession': auth})
     user = r.json().get('userCtx', {})
-    if 'admin' in user.get('roles', []):
+    if 'admin' in user.get('roles', []) or '_admin' in user.get('roles', []):
         return render_template('admin_dashboard.html', name=user['name'])
     return redirect('/login')
 
